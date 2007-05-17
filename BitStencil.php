@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.1 2007/05/17 16:55:55 spiderr Exp $
-* $Id: BitStencil.php,v 1.1 2007/05/17 16:55:55 spiderr Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.2 2007/05/17 18:50:28 spiderr Exp $
+* $Id: BitStencil.php,v 1.2 2007/05/17 18:50:28 spiderr Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.1 $ $Date: 2007/05/17 16:55:55 $ $Author: spiderr $
+* @version $Revision: 1.2 $ $Date: 2007/05/17 18:50:28 $ $Author: spiderr $
 * @class BitStencil
 */
 
@@ -26,14 +26,14 @@ class BitStencil extends LibertyAttachable {
 	* Primary key for our mythical Stencil class object & table
 	* @public
 	*/
-	var $mStencilId;
+	var $mStencilName;
 
 	/**
 	* During initialisation, be sure to call our base constructors
 	**/
-	function BitStencil( $pStencilId=NULL, $pContentId=NULL ) {
+	function BitStencil( $pStencilName=NULL, $pContentId=NULL ) {
 		LibertyAttachable::LibertyAttachable();
-		$this->mStencilId = $pStencilId;
+		$this->mStencilName = $pStencilName;
 		$this->mContentId = $pContentId;
 		$this->mContentTypeGuid = BITSTENCIL_CONTENT_TYPE_GUID;
 		$this->registerContentType( BITSTENCIL_CONTENT_TYPE_GUID, array(
@@ -51,13 +51,13 @@ class BitStencil extends LibertyAttachable {
 	* @param pParamHash be sure to pass by reference in case we need to make modifcations to the hash
 	**/
 	function load() {
-		if( $this->verifyId( $this->mStencilId ) || $this->verifyId( $this->mContentId ) ) {
+		if( $this->verifyId( $this->mStencilName ) || $this->verifyId( $this->mContentId ) ) {
 			// LibertyContent::load()assumes you have joined already, and will not execute any sql!
 			// This is a significant performance optimization
-			$lookupColumn = $this->verifyId( $this->mStencilId ) ? 'stencil_id' : 'content_id';
+			$lookupColumn = $this->verifyId( $this->mStencilName ) ? 'stencil_id' : 'content_id';
 			$bindVars = array();
 			$selectSql = $joinSql = $whereSql = '';
-			array_push( $bindVars, $lookupId = @BitBase::verifyId( $this->mStencilId ) ? $this->mStencilId : $this->mContentId );
+			array_push( $bindVars, $lookupId = @BitBase::verifyId( $this->mStencilName ) ? $this->mStencilName : $this->mContentId );
 			$this->getServicesSql( 'content_load_sql_function', $selectSql, $joinSql, $whereSql, $bindVars );
 
 			$query = "SELECT s.*, lc.*, " .
@@ -74,7 +74,7 @@ class BitStencil extends LibertyAttachable {
 			if( $result && $result->numRows() ) {
 				$this->mInfo = $result->fields;
 				$this->mContentId = $result->fields['content_id'];
-				$this->mStencilId = $result->fields['stencil_id'];
+				$this->mStencilName = $result->fields['stencil_id'];
 
 				$this->mInfo['creator'] =( isset( $result->fields['creator_real_name'] )? $result->fields['creator_real_name'] : $result->fields['creator_user'] );
 				$this->mInfo['editor'] =( isset( $result->fields['modifier_real_name'] )? $result->fields['modifier_real_name'] : $result->fields['modifier_user'] );
@@ -103,7 +103,7 @@ class BitStencil extends LibertyAttachable {
 		if( $this->verify( $pParamHash )&& LibertyAttachable::store( $pParamHash ) ) {
 			$table = BIT_DB_PREFIX."stencils";
 			$this->mDb->StartTrans();
-			if( $this->mStencilId ) {
+			if( $this->mStencilName ) {
 				$locId = array( "stencil_id" => $pParamHash['stencil_id'] );
 				$result = $this->mDb->associateUpdate( $table, $pParamHash['stencil_store'], $locId );
 			} else {
@@ -114,7 +114,7 @@ class BitStencil extends LibertyAttachable {
 				} else {
 					$pParamHash['stencil_store']['stencil_id'] = $this->mDb->GenID( 'stencils_stencil_id_seq' );
 				}
-				$this->mStencilId = $pParamHash['stencil_store']['stencil_id'];
+				$this->mStencilName = $pParamHash['stencil_store']['stencil_id'];
 
 				$result = $this->mDb->associateInsert( $table, $pParamHash['stencil_store'] );
 			}
@@ -141,8 +141,8 @@ class BitStencil extends LibertyAttachable {
 	function verify( &$pParamHash ) {
 		global $gBitUser, $gBitSystem;
 
-		// make sure we're all loaded up of we have a mStencilId
-		if( $this->verifyId( $this->mStencilId ) && empty( $this->mInfo ) ) {
+		// make sure we're all loaded up of we have a mStencilName
+		if( $this->verifyId( $this->mStencilName ) && empty( $this->mInfo ) ) {
 			$this->load();
 		}
 
@@ -175,7 +175,7 @@ class BitStencil extends LibertyAttachable {
 
 		// check for name issues, first truncate length if too long
 		if( !empty( $pParamHash['title'] ) ) {
-			if( empty( $this->mStencilId ) ) {
+			if( empty( $this->mStencilName ) ) {
 				if( empty( $pParamHash['title'] ) ) {
 					$this->mErrors['title'] = 'You must enter a name for this page.';
 				} else {
@@ -215,7 +215,19 @@ class BitStencil extends LibertyAttachable {
 	* Make sure stencil is loaded and valid
 	**/
 	function isValid() {
-		return( $this->verifyId( $this->mStencilId ) );
+		return( $this->verifyId( $this->mStencilName ) );
+	}
+
+	function findByTitle( $pTitle, $pUserId=NULL, $pContentTypeGuid ) {
+		global $gBitDb;
+		$userWhere = '';
+		$bindVars = array( $pTitle, $pContentTypeGuid );
+		if( @BitBase::verifyId( $pUserId ) ) {
+			$userWhere = " AND lc.`user_id`=?";
+			array_push( $bindVars, $pUserId );
+		}
+		$ret = $gBitDb->getOne("select lc.`content_id` FROM `".BIT_DB_PREFIX."liberty_content` lc WHERE lc.`title`=? AND lc.`content_type_guid`=? $userWhere", $bindVars );
+		return $ret;
 	}
 
 	/**
@@ -263,17 +275,5 @@ class BitStencil extends LibertyAttachable {
 		return $ret;
 	}
 
-	/**
-	* Generates the URL to the stencil page
-	* @param pExistsHash the hash that was returned by LibertyContent::pageExists
-	* @return the link to display the page.
-	*/
-	function getDisplayUrl() {
-		$ret = NULL;
-		if( @$this->verifyId( $this->mStencilId ) ) {
-			$ret = STENCIL_PKG_URL."index.php?stencil_id=".$this->mStencilId;
-		}
-		return $ret;
-	}
 }
 ?>
