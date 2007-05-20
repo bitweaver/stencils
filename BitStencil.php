@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.2 2007/05/17 18:50:28 spiderr Exp $
-* $Id: BitStencil.php,v 1.2 2007/05/17 18:50:28 spiderr Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.3 2007/05/20 19:24:28 bitweaver Exp $
+* $Id: BitStencil.php,v 1.3 2007/05/20 19:24:28 bitweaver Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.2 $ $Date: 2007/05/17 18:50:28 $ $Author: spiderr $
+* @version $Revision: 1.3 $ $Date: 2007/05/20 19:24:28 $ $Author: bitweaver $
 * @class BitStencil
 */
 
@@ -216,6 +216,24 @@ class BitStencil extends LibertyAttachable {
 	**/
 	function isValid() {
 		return( $this->verifyId( $this->mStencilName ) );
+	}
+
+	/**
+	 * Generate a valid url for the Stencil
+	 *
+	 * @param	object	PostId of the item to use
+	 * @return	object	Url String
+	 */
+	function getDisplayUrl( $pStencilId=NULL ) {
+		$ret = NULL;
+		if( empty( $pStencilId ) && !empty( $this ) ) {
+			$pStencilId = $this->getField( 'stencil_id' );
+		}
+		global $gBitSystem;
+		if( @BitBase::verifyId( $pStencilId ) ) {
+			$ret = STENCIL_PKG_URL.'index.php?stencil_id='.$pStencilId;
+		}
+		return $ret;
 	}
 
 	function findByTitle( $pTitle, $pUserId=NULL, $pContentTypeGuid ) {

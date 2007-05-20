@@ -18,32 +18,32 @@ if( $gBitSystem->isPackageActive( 'stencil' ) ) {
 
 	function parse_stencil_data( $matches ) {
 		static $gStencilObjects = array();
-			$output = $matches[0];
-			if( !empty( $matches[2] ) ) {
-				$output = '';
-				$templateVars = array();
-				$templateName = $matches[1];
-				if( empty( $gStencilObjects[$templateName] ) ) {
-					if( $stencilContentId = BitStencil::findByTitle( $templateName, NULL, BITSTENCIL_CONTENT_TYPE_GUID ) ) {
-						$gStencilObjects[$templateName] = new BitStencil( NULL, $stencilContentId );
-						if( $gStencilObjects[$templateName]->load() ) {
-							$output =  $gStencilObjects[$templateName]->getField( 'data' );
-						}
+		$output = $matches[0];
+		if( !empty( $matches[2] ) ) {
+			$output = '';
+			$templateVars = array();
+			$templateName = $matches[1];
+			if( empty( $gStencilObjects[$templateName] ) ) {
+				if( $stencilContentId = BitStencil::findByTitle( $templateName, NULL, BITSTENCIL_CONTENT_TYPE_GUID ) ) {
+					$gStencilObjects[$templateName] = new BitStencil( NULL, $stencilContentId );
+					if( $gStencilObjects[$templateName]->load() ) {
+						$output =  $gStencilObjects[$templateName]->getField( 'data' );
 					}
 				}
-				if( $lines = explode( '|', $matches[2] ) ) {
-					foreach( $lines as $line ) {
-						if( strpos( $line, '=' ) ) {
-							list( $name, $value ) = split( '=', trim( $line ) );
-							$templateVars[$name] = $value;
-							$output = preg_replace( '/\{\{\{'.$name.'\}\}\}/', $value, $output );
-						}
-					}
-				}
-					
-				// now need to do the substitution
 			}
-			return( $output );
+			if( $lines = explode( '|', $matches[2] ) ) {
+				foreach( $lines as $line ) {
+					if( strpos( $line, '=' ) ) {
+						list( $name, $value ) = split( '=', trim( $line ) );
+						$templateVars[$name] = $value;
+						$output = preg_replace( '/\{\{\{'.$name.'\}\}\}/', $value, $output );
+					}
+				}
+			}
+				
+			// now need to do the substitution
+		}
+		return( $output );
 	}
 
 }
