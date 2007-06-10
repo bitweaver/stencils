@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.1 2007/05/17 16:55:55 spiderr Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.2 2007/06/10 20:04:58 squareing Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -30,14 +30,14 @@
 						<div class="row">
 							{formlabel label="Title" for="title"}
 							{forminput}
-								<input type="text" size="60" maxlength="200" name="stencil[title]" id="title" value="{$gContent->mInfo.title|escape}" />
+								<input type="text" size="50" maxlength="200" name="stencil[title]" id="title" value="{$gContent->mInfo.title|escape}" />
 							{/forminput}
 						</div>
 
 						<div class="row">
 							{formlabel label="Description" for="description"}
 							{forminput}
-								<input size="60" type="text" name="stencil[description]" id="description" value="{$gContent->mInfo.description|escape}" />
+								<input size="50" type="text" name="stencil[description]" id="description" value="{$gContent->mInfo.description|escape}" />
 								{formhelp note="Brief description of the page."}
 							{/forminput}
 						</div>
