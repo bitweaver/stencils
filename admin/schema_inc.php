@@ -47,7 +47,6 @@ $gBitInstaller->registerUserPermissions( STENCIL_PKG_NAME, array(
 
 // ### Default Preferences
 $gBitInstaller->registerPreferences( STENCIL_PKG_NAME, array(
-	array( STENCIL_PKG_NAME, 'stencil_default_ordering', 'stencil_id_desc' ),
 	array( STENCIL_PKG_NAME, 'stencil_list_title', 'y' ),
 	array( STENCIL_PKG_NAME, 'stencil_list_description', 'y' ),
 	array( STENCIL_PKG_NAME, 'stencil_list_stencils', 'y' ),
