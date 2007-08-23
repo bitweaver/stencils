@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.3 2007/05/20 19:24:28 bitweaver Exp $
-* $Id: BitStencil.php,v 1.3 2007/05/20 19:24:28 bitweaver Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.4 2007/08/23 14:01:47 squareing Exp $
+* $Id: BitStencil.php,v 1.4 2007/08/23 14:01:47 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.3 $ $Date: 2007/05/20 19:24:28 $ $Author: bitweaver $
+* @version $Revision: 1.4 $ $Date: 2007/08/23 14:01:47 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -277,7 +277,7 @@ class BitStencil extends LibertyAttachable {
 		$query = "SELECT ts.*, lc.`content_id`, lc.`title`, lc.`data` $selectSql
 			FROM `".BIT_DB_PREFIX."stencils` ts INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = ts.`content_id` ) $joinSql
 			WHERE lc.`content_type_guid` = ? $whereSql
-			ORDER BY ".$this->mDb->convert_sortmode( $sort_mode );
+			ORDER BY ".$this->mDb->convertSortmode( $sort_mode );
 		$query_cant = "select count(*)
 				FROM `".BIT_DB_PREFIX."stencils` ts INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = ts.`content_id` ) $joinSql
 			WHERE lc.`content_type_guid` = ? $whereSql";
