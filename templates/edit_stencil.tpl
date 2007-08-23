@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.2 2007/06/10 20:04:58 squareing Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.3 2007/08/23 15:56:05 squareing Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -42,7 +42,7 @@
 							{/forminput}
 						</div>
 
-						{textarea name="stencil[edit]"}{/textarea}
+						{textarea name="stencil[edit]"}{$gContent->mInfo.data}{/textarea}
 
 						{* any simple service edit options *}
 						{include file="bitpackage:liberty/edit_services_inc.tpl serviceFile=content_edit_mini_tpl}
