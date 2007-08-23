@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/list_stencils.tpl,v 1.1 2007/05/17 16:55:55 spiderr Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/list_stencils.tpl,v 1.2 2007/08/23 15:18:50 squareing Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -44,7 +44,7 @@
 						{/if}
 
 						{if $gBitSystem->isFeatureActive( 'stencil_list_title' )}
-							<td>{$stencil.title|escape}</td>
+							<td><a href="{$smarty.const.STENCIL_PKG_URL}index.php?stencil_id={$stencil.stencil_id|escape:"url"}" title="{$stencil.stencil_id}">{$stencil.title|escape}</a></td>
 						{/if}
 
 						{if $gBitSystem->isFeatureActive( 'stencil_list_description' )}

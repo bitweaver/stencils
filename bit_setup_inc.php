@@ -4,7 +4,7 @@ global $gBitSystem;
 $registerHash = array(
 	'package_name' => 'stencil',
 	'package_path' => dirname( __FILE__ ).'/',
-	'homeable' => TRUE,
+	'service' => LIBERTY_SERVICE_CONTENT_TEMPLATES
 );
 $gBitSystem->registerPackage( $registerHash );
 
@@ -16,35 +16,13 @@ if( $gBitSystem->isPackageActive( 'stencil' ) ) {
 	);
 	$gBitSystem->registerAppMenu( $menuHash );
 
-	function parse_stencil_data( $matches ) {
-		static $gStencilObjects = array();
-		$output = $matches[0];
-		if( !empty( $matches[2] ) ) {
-			$output = '';
-			$templateVars = array();
-			$templateName = $matches[1];
-			if( empty( $gStencilObjects[$templateName] ) ) {
-				if( $stencilContentId = BitStencil::findByTitle( $templateName, NULL, BITSTENCIL_CONTENT_TYPE_GUID ) ) {
-					$gStencilObjects[$templateName] = new BitStencil( NULL, $stencilContentId );
-					if( $gStencilObjects[$templateName]->load() ) {
-						$output =  $gStencilObjects[$templateName]->getField( 'data' );
-					}
-				}
-			}
-			if( $lines = explode( '|', $matches[2] ) ) {
-				foreach( $lines as $line ) {
-					if( strpos( $line, '=' ) ) {
-						list( $name, $value ) = split( '=', trim( $line ) );
-						$templateVars[$name] = $value;
-						$output = preg_replace( '/\{\{\{'.$name.'\}\}\}/', $value, $output );
-					}
-				}
-			}
-				
-			// now need to do the substitution
-		}
-		return( $output );
-	}
+	require_once( STENCIL_PKG_PATH.'BitStencil.php' );
+	$gLibertySystem->registerService( LIBERTY_SERVICE_CONTENT_TEMPLATES, STENCIL_PKG_NAME, array(
+		// functions
+		'content_edit_function' => 'stencil_content_edit',
 
+		// templates
+		'content_edit_tab_tpl'  => 'bitpackage:stencil/service_edit_tab_inc.tpl',
+	));
 }
 ?>
