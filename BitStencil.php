@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.5 2007/08/23 15:18:50 squareing Exp $
-* $Id: BitStencil.php,v 1.5 2007/08/23 15:18:50 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.6 2007/08/23 15:49:57 squareing Exp $
+* $Id: BitStencil.php,v 1.6 2007/08/23 15:49:57 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.5 $ $Date: 2007/08/23 15:18:50 $ $Author: squareing $
+* @version $Revision: 1.6 $ $Date: 2007/08/23 15:49:57 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -283,6 +283,17 @@ class BitStencil extends LibertyAttachable {
 		// add all pagination info to pParamHash
 		LibertyContent::postGetList( $pParamHash );
 		return $ret;
+	}
+
+	function findByTitle( $pTitle, $pUserId=NULL, $pContentTypeGuid ) {
+		global $gBitDb;
+		$userWhere = '';
+		$bindVars = array( $pTitle, $pContentTypeGuid );
+		if( @BitBase::verifyId( $pUserId ) ) {
+			$userWhere = " AND lc.`user_id`=?";
+			array_push( $bindVars, $pUserId );
+		}
+		return $gBitDb->getOne( "SELECT lc.`content_id` FROM `".BIT_DB_PREFIX."liberty_content` lc WHERE lc.`title`=? AND lc.`content_type_guid`=? $userWhere", $bindVars );
 	}
 }
 
