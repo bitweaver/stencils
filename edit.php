@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.3 2007/08/23 15:18:50 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.4 2007/08/23 20:41:51 squareing Exp $
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -17,6 +17,14 @@ require_once( STENCIL_PKG_PATH.'lookup_stencil_inc.php' );
 
 if( isset( $_REQUEST['stencil']["title"] )) {
 	$gContent->mInfo["title"] = $_REQUEST['stencil']["title"];
+}
+
+// If we are in preview mode then preview it!
+if( isset( $_REQUEST["preview"] ) ) {
+	$gBitSmarty->assign('preview', 'y');
+	$gContent->invokeServices('content_preview_function');
+} else {
+	$gContent->invokeServices( 'content_edit_function' );
 }
 
 // Check if the page has changed
