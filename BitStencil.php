@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.6 2007/08/23 15:49:57 squareing Exp $
-* $Id: BitStencil.php,v 1.6 2007/08/23 15:49:57 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.7 2007/08/24 22:10:06 squareing Exp $
+* $Id: BitStencil.php,v 1.7 2007/08/24 22:10:06 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.6 $ $Date: 2007/08/23 15:49:57 $ $Author: squareing $
+* @version $Revision: 1.7 $ $Date: 2007/08/24 22:10:06 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -36,13 +36,14 @@ class BitStencil extends LibertyAttachable {
 		$this->mStencilId = $pStencilName;
 		$this->mContentId = $pContentId;
 		$this->mContentTypeGuid = BITSTENCIL_CONTENT_TYPE_GUID;
-		$this->registerContentType( BITSTENCIL_CONTENT_TYPE_GUID, array(
-			'content_type_guid' => BITSTENCIL_CONTENT_TYPE_GUID,
-			'content_description' => 'Stencil package with bare essentials',
-			'handler_class' => 'BitStencil',
-			'handler_package' => 'stencil',
-			'handler_file' => 'BitStencil.php',
-			'maintainer_url' => 'http://www.bitweaver.org'
+		$this->registerContentType(
+		   	BITSTENCIL_CONTENT_TYPE_GUID, array(
+				'content_type_guid'   => BITSTENCIL_CONTENT_TYPE_GUID,
+				'content_description' => 'Stencil',
+				'handler_class'       => 'BitStencil',
+				'handler_package'     => 'stencil',
+				'handler_file'        => 'BitStencil.php',
+				'maintainer_url'      => 'http://www.bitweaver.org'
 		));
 	}
 
