@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.7 2007/08/24 22:10:06 squareing Exp $
-* $Id: BitStencil.php,v 1.7 2007/08/24 22:10:06 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.8 2007/08/28 20:45:53 squareing Exp $
+* $Id: BitStencil.php,v 1.8 2007/08/28 20:45:53 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.7 $ $Date: 2007/08/24 22:10:06 $ $Author: squareing $
+* @version $Revision: 1.8 $ $Date: 2007/08/28 20:45:53 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -270,7 +270,7 @@ class BitStencil extends LibertyAttachable {
 			// generate output that can be copied and pasted into the textarea
 			if( !empty( $pParamHash['get_usage'] )) {
 				// extract all variables
-				preg_match_all( "!\{{3}(.*?)\}{3}!", $res['data'], $matches );
+				preg_match_all( "!\{{3}(\w*?)\}{3}!", $res['data'], $matches );
 				$res['usage'] = "{{{$res['title']}|\n";
 				foreach( $matches[1] as $match ) {
 					$res['usage'] .= "|$match=\n";
