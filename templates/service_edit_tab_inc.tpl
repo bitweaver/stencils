@@ -1,4 +1,5 @@
 {strip}
+{if $gBitUser->hasPermission( 'p_stencil_read' )}
 {if $stencilList}
 	{jstab title="Stencils"}
 		{legend legend="Available Stencils"}
@@ -26,5 +27,6 @@
 			{/foreach}
 		{/legend}
 	{/jstab}
+{/if}
 {/if}
 {/strip}
