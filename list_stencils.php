@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/list_stencils.php,v 1.2 2007/05/17 18:50:29 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_stencils/list_stencils.php,v 1.3 2008/06/25 22:21:24 spiderr Exp $
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -64,6 +64,6 @@ $gBitSmarty->assign_by_ref( 'stencilsList', $stencilsList );
 $gBitSmarty->assign_by_ref( 'listInfo', $_REQUEST['listInfo'] );
 
 // Display the template
-$gBitSystem->display( 'bitpackage:stencil/list_stencils.tpl', tra( 'Stencil' ) );
+$gBitSystem->display( 'bitpackage:stencil/list_stencils.tpl', tra( 'Stencil' ) , array( 'display_mode' => 'list' ));
 
 ?>

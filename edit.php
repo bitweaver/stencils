@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.4 2007/08/23 20:41:51 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.5 2008/06/25 22:21:24 spiderr Exp $
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -39,5 +39,5 @@ if( !empty( $_REQUEST["save_stencil"] )) {
 $gBitSmarty->assign( 'feedback', !empty( $feedback ) ? $feedback : NULL );
 
 // Display the template
-$gBitSystem->display( 'bitpackage:stencil/edit_stencil.tpl', tra('Stencil') );
+$gBitSystem->display( 'bitpackage:stencil/edit_stencil.tpl', tra('Stencil') , array( 'display_mode' => 'edit' ));
 ?>
