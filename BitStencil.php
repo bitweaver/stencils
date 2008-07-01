@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.8 2007/08/28 20:45:53 squareing Exp $
-* $Id: BitStencil.php,v 1.8 2007/08/28 20:45:53 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.9 2008/07/01 23:41:12 wjames5 Exp $
+* $Id: BitStencil.php,v 1.9 2008/07/01 23:41:12 wjames5 Exp $
 */
 
 /**
@@ -10,18 +10,18 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.8 $ $Date: 2007/08/28 20:45:53 $ $Author: squareing $
+* @version $Revision: 1.9 $ $Date: 2008/07/01 23:41:12 $ $Author: wjames5 $
 * @class BitStencil
 */
 
-require_once( LIBERTY_PKG_PATH.'LibertyAttachable.php' );
+require_once( LIBERTY_PKG_PATH.'LibertyMime.php' );
 
 /**
 * This is used to uniquely identify the object
 */
 define( 'BITSTENCIL_CONTENT_TYPE_GUID', 'bitstencil' );
 
-class BitStencil extends LibertyAttachable {
+class BitStencil extends LibertyMime {
 	/**
 	* Primary key for our mythical Stencil class object & table
 	* @public
@@ -32,7 +32,7 @@ class BitStencil extends LibertyAttachable {
 	* During initialisation, be sure to call our base constructors
 	**/
 	function BitStencil( $pStencilName=NULL, $pContentId=NULL ) {
-		LibertyAttachable::LibertyAttachable();
+		LibertyMime::LibertyMime();
 		$this->mStencilId = $pStencilName;
 		$this->mContentId = $pContentId;
 		$this->mContentTypeGuid = BITSTENCIL_CONTENT_TYPE_GUID;
@@ -80,7 +80,7 @@ class BitStencil extends LibertyAttachable {
 				$this->mInfo['display_url'] = $this->getDisplayUrl();
 				$this->mInfo['parsed_data'] = $this->parseData();
 
-				LibertyAttachable::load();
+				LibertyMime::load();
 			}
 		}
 		return( count( $this->mInfo ) );
@@ -99,7 +99,7 @@ class BitStencil extends LibertyAttachable {
 	* @access public
 	**/
 	function store( &$pParamHash ) {
-		if( $this->verify( $pParamHash )&& LibertyAttachable::store( $pParamHash ) ) {
+		if( $this->verify( $pParamHash )&& LibertyMime::store( $pParamHash ) ) {
 			$table = BIT_DB_PREFIX."stencils";
 			$this->mDb->StartTrans();
 			if( $this->mStencilId ) {
@@ -199,7 +199,7 @@ class BitStencil extends LibertyAttachable {
 			$this->mDb->StartTrans();
 			$query = "DELETE FROM `".BIT_DB_PREFIX."stencils` WHERE `content_id` = ?";
 			$result = $this->mDb->query( $query, array( $this->mContentId ) );
-			if( LibertyAttachable::expunge() ) {
+			if( LibertyMime::expunge() ) {
 				$ret = TRUE;
 				$this->mDb->CompleteTrans();
 			} else {
