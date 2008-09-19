@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_stencils/remove_stencil.php,v 1.2 2007/05/17 18:50:29 spiderr Exp $
+ * $Header: /cvsroot/bitweaver/_bit_stencils/remove_stencil.php,v 1.3 2008/09/19 01:34:38 laetzer Exp $
  *
  * Copyright (c) 2004 bitweaver.org
  * Copyright (c) 2003 tikwiki.org
@@ -8,7 +8,7 @@
  * All Rights Reserved. See copyright.txt for details and a complete list of authors.
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details
  *
- * $Id: remove_stencil.php,v 1.2 2007/05/17 18:50:29 spiderr Exp $
+ * $Id: remove_stencil.php,v 1.3 2008/09/19 01:34:38 laetzer Exp $
  * @package stencil
  * @subpackage functions
  */
@@ -43,7 +43,8 @@ $formHash['stencil_id'] = $_REQUEST['stencil_id'];
 $msgHash = array(
 	'label' => tra( 'Delete Stencil' ),
 	'confirm_item' => $gContent->getTitle(),
-	'warning' => tra( 'This stencil will be completely deleted.<br />This cannot be undone!' ),
+	'warning' => tra( 'This stencil will be completely deleted.' ),
+	'error' => tra('This cannot be undone!'),
 );
 $gBitSystem->confirmDialog( $formHash,$msgHash );
 
