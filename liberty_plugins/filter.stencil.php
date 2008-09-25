@@ -1,6 +1,6 @@
 <?php
 /**
- * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.1 2008/07/08 07:25:48 spiderr Exp $
+ * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.2 2008/09/25 21:16:58 squareing Exp $
  * @package  liberty
  * @subpackage plugins_filter
  */
@@ -16,7 +16,6 @@ $pluginParams = array(
 	'title'              => 'Stencil',
 	'description'        => 'If you are using the stencil package, you need to enable this filter.',
 	'auto_activate'      => TRUE,
-	'path'               => LIBERTY_PKG_PATH.'plugins/filter.stencil.php',
 	'plugin_type'        => FILTER_PLUGIN,
 
 	// filter functions
@@ -24,6 +23,14 @@ $pluginParams = array(
 );
 $gLibertySystem->registerPlugin( PLUGIN_GUID_FILTERSTENCIL, $pluginParams );
 
+/**
+ * stencil_filter 
+ * 
+ * @param array $pData 
+ * @param array $pFilterHash 
+ * @access public
+ * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+ */
 function stencil_filter( &$pData, &$pFilterHash ) {
 	global $gBitSystem, $gBitSmarty;
 	if( $gBitSystem->isPackageActive( 'stencil' )) {
@@ -32,12 +39,19 @@ function stencil_filter( &$pData, &$pFilterHash ) {
 	}
 }
 
-function stencil_parse_data( $matches ) {
+/**
+ * stencil_parse_data 
+ * 
+ * @param array $pMatches 
+ * @access public
+ * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+ */
+function stencil_parse_data( $pMatches ) {
 	static $sStencilObjects = array();
-	$output = $matches[0];
-	if( !empty( $matches[2] )) {
+	$output = $pMatches[0];
+	if( !empty( $pMatches[2] )) {
 		$output = '';
-		$templateName = $matches[1];
+		$templateName = $pMatches[1];
 		if( empty( $sStencilObjects[$templateName] ) ) {
 			if( $stencilContentId = BitStencil::findByTitle( $templateName, NULL, BITSTENCIL_CONTENT_TYPE_GUID ) ) {
 				$sStencilObjects[$templateName] = new BitStencil( NULL, $stencilContentId );
@@ -49,7 +63,7 @@ function stencil_parse_data( $matches ) {
 			$output = $sStencilObjects[$templateName]->getField( 'data' );
 		}
 
-		if( $lines = explode( '|', $matches[2] )) {
+		if( $lines = explode( '|', $pMatches[2] )) {
 			foreach( $lines as $line ) {
 				if( strpos( $line, '=' ) ) {
 					list( $name, $value ) = split( '=', trim( $line ), 2 );
