@@ -1,8 +1,8 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.3 2007/08/23 15:56:05 squareing Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.4 2008/10/13 09:37:23 laetzer Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
-<div class="admin stencil">
+<div class="edit stencil">
 	{if $preview}
 		<h2>Preview {$gContent->mInfo.title|escape}</h2>
 		<div class="preview">
@@ -23,8 +23,8 @@
 	<div class="body">
 		{form enctype="multipart/form-data" id="editstencilform"}
 			{jstabs}
-				{jstab}
-					{legend legend="Edit/Create Stencil Record"}
+				{jstab title=$gContent->mInfo.title|default:"Edit"}
+					{legend legend="Edit Stencil Record"}
 						<input type="hidden" name="stencil[stencil_id]" value="{$gContent->mInfo.stencil_id}" />
 
 						<div class="row">
