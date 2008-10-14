@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/list_stencils.tpl,v 1.2 2007/08/23 15:18:50 squareing Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/list_stencils.tpl,v 1.3 2008/10/14 10:07:18 laetzer Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -54,13 +54,17 @@
 						{if $gBitSystem->isFeatureActive( 'stencil_list_data' )}
 							<td>{$stencil.data|escape}</td>
 						{/if}
-
-						{if $gBitUser->hasPermission( 'p_stencil_remove' )}
-							<td class="actionicon">
+						<td class="actionicon">
+							{if $gBitUser->hasPermission( 'p_stencil_edit' )}
 								{smartlink ititle="Edit" ifile="edit.php" ibiticon="icons/accessories-text-editor" stencil_id=$stencil.stencil_id}
+							{/if}
+							{if $gBitUser->hasPermission( 'p_stencil_remove' )}
+								{smartlink ititle="Delete" ifile="remove_stencil.php" ibiticon="icons/edit-delete" stencil_id=$stencil.stencil_id}
+							{/if}
+							{if $gBitUser->hasPermission( 'p_stencil_remove' )}
 								<input type="checkbox" name="checked[]" title="{$stencil.title|escape}" value="{$stencil.stencil_id}" />
-							</td>
-						{/if}
+							{/if}
+						</td>
 					</tr>
 				{foreachelse}
 					<tr class="norecords"><td colspan="16">
