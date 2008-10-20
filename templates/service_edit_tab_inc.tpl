@@ -10,7 +10,7 @@
 				{/if}
 				<h2>
 					{$stencil.title}
-					{if $gBitUser->hasPermission( 'p_stencil_edit' )}
+					{if $gBitUser->hasPermission( 'p_stencil_update' )}
 						{smartlink ititle="Edit" ibiticon="icons/accessories-text-editor" ipackage=stencil ifile=edit.php stencil_id=$stencil.stencil_id}
 					{/if}
 				</h2>

@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.6 2008/10/03 17:20:16 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.7 2008/10/20 21:40:11 spiderr Exp $
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -14,7 +14,7 @@ require_once( STENCIL_PKG_PATH.'lookup_stencil_inc.php' );
 
 // Now check permissions to access this page
 if( $gContent->isValid() ){
-	$gContent->verifyEditPermission();
+	$gContent->verifyUpdatePermission();
 }else{
 	$gContent->verifyCreatePermission();
 }

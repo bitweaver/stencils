@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/list_stencils.tpl,v 1.3 2008/10/14 10:07:18 laetzer Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/list_stencils.tpl,v 1.4 2008/10/20 21:40:11 spiderr Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -55,7 +55,7 @@
 							<td>{$stencil.data|escape}</td>
 						{/if}
 						<td class="actionicon">
-							{if $gBitUser->hasPermission( 'p_stencil_edit' )}
+							{if $gBitUser->hasPermission( 'p_stencil_update' )}
 								{smartlink ititle="Edit" ifile="edit.php" ibiticon="icons/accessories-text-editor" stencil_id=$stencil.stencil_id}
 							{/if}
 							{if $gBitUser->hasPermission( 'p_stencil_remove' )}

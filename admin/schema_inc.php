@@ -40,7 +40,7 @@ $gBitInstaller->registerSchemaDefault( STENCIL_PKG_NAME, array(
 $gBitInstaller->registerUserPermissions( STENCIL_PKG_NAME, array(
 	array( 'p_stencil_admin', 'Can admin stencil', 'admin', STENCIL_PKG_NAME ),
 	array( 'p_stencil_create', 'Can create a stencil', 'registered', STENCIL_PKG_NAME ),
-	array( 'p_stencil_edit', 'Can edit any stencil', 'editors', STENCIL_PKG_NAME ),
+	array( 'p_stencil_update', 'Can edit any stencil', 'editors', STENCIL_PKG_NAME ),
 	array( 'p_stencil_read', 'Can read stencil', 'basic',  STENCIL_PKG_NAME ),
 	array( 'p_stencil_remove', 'Can delete stencil', 'admin',  STENCIL_PKG_NAME ),
 ) );

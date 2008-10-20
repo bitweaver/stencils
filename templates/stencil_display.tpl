@@ -2,7 +2,7 @@
 <div class="display stencil">
 	<div class="floaticon">
 		{if $print_page ne 'y'}
-			{if $gBitUser->hasPermission( 'p_stencil_edit' )}
+			{if $gBitUser->hasPermission( 'p_stencil_update' )}
 				<a title="{tr}Edit this stencil{/tr}" href="{$smarty.const.STENCIL_PKG_URL}edit.php?stencil_id={$gContent->mInfo.stencil_id}">{biticon ipackage="icons" iname="accessories-text-editor" iexplain="Edit Stencil"}</a>
 			{/if}
 			{if $gBitUser->hasPermission( 'p_stencil_remove' )}

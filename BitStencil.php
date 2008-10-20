@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.10 2008/10/03 17:20:16 wjames5 Exp $
-* $Id: BitStencil.php,v 1.10 2008/10/03 17:20:16 wjames5 Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.11 2008/10/20 21:40:11 spiderr Exp $
+* $Id: BitStencil.php,v 1.11 2008/10/20 21:40:11 spiderr Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.10 $ $Date: 2008/10/03 17:20:16 $ $Author: wjames5 $
+* @version $Revision: 1.11 $ $Date: 2008/10/20 21:40:11 $ $Author: spiderr $
 * @class BitStencil
 */
 
@@ -47,7 +47,7 @@ class BitStencil extends LibertyMime {
 		));
 		$this->mViewContentPerm  = 'p_stencil_read';
 		$this->mCreateContentPerm  = 'p_stencil_create';
-		$this->mEditContentPerm  = 'p_stencil_edit';
+		$this->mUpdateContentPerm  = 'p_stencil_update';
 		$this->mAdminContentPerm = 'p_stencil_admin';
 	}
 
