@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.12 2008/11/07 23:49:28 pppspoonman Exp $
-* $Id: BitStencil.php,v 1.12 2008/11/07 23:49:28 pppspoonman Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.13 2008/11/08 15:44:22 squareing Exp $
+* $Id: BitStencil.php,v 1.13 2008/11/08 15:44:22 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.12 $ $Date: 2008/11/07 23:49:28 $ $Author: pppspoonman $
+* @version $Revision: 1.13 $ $Date: 2008/11/08 15:44:22 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -261,8 +261,7 @@ class BitStencil extends LibertyMime {
 			$bindVars[] = '%' . strtoupper( $pParamHash['find'] ). '%';
 		}
 
-		//Fix for ORA-00918: column ambiguously defined - ts.content_id will be the same as lc.content_id either way.
-		$query = "SELECT ts.*, lc.`content_id` AS lc_content_id, lc.`title`, lc.`data` $selectSql
+		$query = "SELECT ts.*, lc.`title`, lc.`data` $selectSql
 			FROM `".BIT_DB_PREFIX."stencils` ts INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = ts.`content_id` ) $joinSql
 			WHERE lc.`content_type_guid` = ? $whereSql
 			ORDER BY ".$this->mDb->convertSortmode( $pParamHash['sort_mode'] );
