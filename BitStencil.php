@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.13 2008/11/08 15:44:22 squareing Exp $
-* $Id: BitStencil.php,v 1.13 2008/11/08 15:44:22 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.14 2008/11/08 15:47:08 squareing Exp $
+* $Id: BitStencil.php,v 1.14 2008/11/08 15:47:08 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.13 $ $Date: 2008/11/08 15:44:22 $ $Author: squareing $
+* @version $Revision: 1.14 $ $Date: 2008/11/08 15:47:08 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -63,15 +63,15 @@ class BitStencil extends LibertyMime {
 			array_push( $bindVars, $lookupId = @BitBase::verifyId( $this->mStencilId ) ? $this->mStencilId : $this->mContentId );
 			$this->getServicesSql( 'content_load_sql_function', $selectSql, $joinSql, $whereSql, $bindVars );
 
-			$query = "SELECT s.*, lc.*,
+			$query = "SELECT sten.*, lc.*,
 				uue.`login` AS modifier_user, uue.`real_name` AS modifier_real_name,
 				uuc.`login` AS creator_user, uuc.`real_name` AS creator_real_name
 				$selectSql
-				FROM `".BIT_DB_PREFIX."stencils` s
-					INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = s.`content_id` ) $joinSql
+				FROM `".BIT_DB_PREFIX."stencils` sten
+					INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = sten.`content_id` ) $joinSql
 					LEFT JOIN `".BIT_DB_PREFIX."users_users` uue ON( uue.`user_id` = lc.`modifier_user_id` )
 					LEFT JOIN `".BIT_DB_PREFIX."users_users` uuc ON( uuc.`user_id` = lc.`user_id` )
-				WHERE s.`$lookupColumn`=? $whereSql";
+				WHERE sten.`$lookupColumn`=? $whereSql";
 			$result = $this->mDb->query( $query, $bindVars );
 
 			if( $result && $result->numRows() ) {
@@ -261,12 +261,12 @@ class BitStencil extends LibertyMime {
 			$bindVars[] = '%' . strtoupper( $pParamHash['find'] ). '%';
 		}
 
-		$query = "SELECT ts.*, lc.`title`, lc.`data` $selectSql
-			FROM `".BIT_DB_PREFIX."stencils` ts INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = ts.`content_id` ) $joinSql
+		$query = "SELECT sten.*, lc.`title`, lc.`data` $selectSql
+			FROM `".BIT_DB_PREFIX."stencils` sten INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = sten.`content_id` ) $joinSql
 			WHERE lc.`content_type_guid` = ? $whereSql
 			ORDER BY ".$this->mDb->convertSortmode( $pParamHash['sort_mode'] );
 		$query_cant = "select count(*)
-				FROM `".BIT_DB_PREFIX."stencils` ts INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = ts.`content_id` ) $joinSql
+				FROM `".BIT_DB_PREFIX."stencils` sten INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id` = sten.`content_id` ) $joinSql
 			WHERE lc.`content_type_guid` = ? $whereSql";
 		$result = $this->mDb->query( $query, $bindVars, $pParamHash['max_records'], $pParamHash['offset'] );
 		$ret = array();
