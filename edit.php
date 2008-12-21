@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.7 2008/10/20 21:40:11 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_stencils/edit.php,v 1.8 2008/12/21 23:50:12 pppspoonman Exp $
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -21,6 +21,20 @@ if( $gContent->isValid() ){
 
 if( isset( $_REQUEST['stencil']["title"] )) {
 	$gContent->mInfo["title"] = $_REQUEST['stencil']["title"];
+}
+
+if( isset( $_REQUEST['stencil']["description"] )) {
+	$gContent->mInfo["description"] = $_REQUEST['stencil']["description"];
+}
+
+if( isset( $_REQUEST["format_guid"] ) ) {
+	$gContent->mInfo['format_guid'] = $_REQUEST["format_guid"];
+}
+
+if( isset( $_REQUEST['stencil']["edit"] ) ) {
+	$gContent->mInfo["data"] = $_REQUEST['stencil']["edit"];
+	$gContent->mInfo["no_cache"] = TRUE;
+	$gContent->mInfo["parsed_data"] = $gContent->parseData();
 }
 
 // If we are in preview mode then preview it!
