@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.14 2008/11/08 15:47:08 squareing Exp $
-* $Id: BitStencil.php,v 1.14 2008/11/08 15:47:08 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.15 2008/12/26 20:57:58 pppspoonman Exp $
+* $Id: BitStencil.php,v 1.15 2008/12/26 20:57:58 pppspoonman Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.14 $ $Date: 2008/11/08 15:47:08 $ $Author: squareing $
+* @version $Revision: 1.15 $ $Date: 2008/12/26 20:57:58 $ $Author: pppspoonman $
 * @class BitStencil
 */
 
@@ -27,6 +27,18 @@ class BitStencil extends LibertyMime {
 	* @public
 	*/
 	var $mStencilId;
+	
+	/**
+	 * Valid regular expression to validate stencil using \w character class.
+	 * @private
+	 */
+	var $validRegexp;
+	
+	/**
+	 * Invalid rexpression to validate stencil.
+	 * @private
+	 */
+	var $invalidRegexp;
 
 	/**
 	* During initialisation, be sure to call our base constructors
@@ -35,6 +47,8 @@ class BitStencil extends LibertyMime {
 		LibertyMime::LibertyMime();
 		$this->mStencilId = $pStencilName;
 		$this->mContentId = $pContentId;
+		$this->validRegexp = "!\{{3}(\w*?)\}{3}!";
+		$this->invalidRegexp = "!\{{3}(.*?)\}{3}!";
 		$this->mContentTypeGuid = BITSTENCIL_CONTENT_TYPE_GUID;
 		$this->registerContentType(
 		   	BITSTENCIL_CONTENT_TYPE_GUID, array(
@@ -142,7 +156,7 @@ class BitStencil extends LibertyMime {
 	**/
 	function verify( &$pParamHash ) {
 		global $gBitUser, $gBitSystem;
-
+		
 		// make sure we're all loaded up of we have a mStencilId
 		if( $this->verifyId( $this->mStencilId ) && empty( $this->mInfo ) ) {
 			$this->load();
@@ -190,7 +204,30 @@ class BitStencil extends LibertyMime {
 			// no name specified
 			$this->mErrors['title'] = 'You must specify a name';
 		}
-
+		
+		$validArray = array ();
+		$invalidArray = array ();
+		preg_match_all($this->validRegexp, $pParamHash['edit'], $validArray);
+		preg_match_all($this->invalidRegexp, $pParamHash['edit'], $invalidArray);
+		
+		//Invalid array will catch all of stencils with spaces, special characters etc. as it's wider.
+		//Iterate by this array and compare which keys are invalid.
+		
+		$validCounter = 0;
+		
+		foreach( $invalidArray[1] as $key => $value) {
+			//Turn on for debug.			
+			//$this->mErrors['fields'][] = "Comparing key $key value $value with ".$validArray[1][$validCounter].".";
+			
+			//it's present and it's equal
+			if( array_key_exists($validCounter, $validArray[1]) && $value == $validArray[1][$validCounter]) {
+				$validCounter++;
+				continue;
+			}
+			
+			$this->mErrors['fields'][] = "Stencil field '$value' is not correct. For compatibility please don't use spaces, national or special characters.";
+		}
+		
 		return( count( $this->mErrors )== 0 );
 	}
 
@@ -274,7 +311,7 @@ class BitStencil extends LibertyMime {
 			// generate output that can be copied and pasted into the textarea
 			if( !empty( $pParamHash['get_usage'] )) {
 				// extract all variables
-				preg_match_all( "!\{{3}(\w*?)\}{3}!", $res['data'], $matches );
+				preg_match_all( $this->validRegexp, $res['data'], $matches );
 				$res['usage'] = "{{{$res['title']}|\n";
 				foreach( $matches[1] as $match ) {
 					$res['usage'] .= "|$match=\n";

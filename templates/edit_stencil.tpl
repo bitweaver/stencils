@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.4 2008/10/13 09:37:23 laetzer Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.5 2008/12/26 20:57:58 pppspoonman Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -15,11 +15,11 @@
 			{if $gContent->mInfo.stencil_id}
 				{tr}{tr}Edit{/tr} {$gContent->mInfo.title|escape}{/tr}
 			{else}
-				{tr}Create New Record{/tr}
+				{tr}Create New Stencil{/tr}
 			{/if}
 		</h1>
 	</div>
-
+	
 	<div class="body">
 		{form enctype="multipart/form-data" id="editstencilform"}
 			{jstabs}
@@ -28,6 +28,7 @@
 						<input type="hidden" name="stencil[stencil_id]" value="{$gContent->mInfo.stencil_id}" />
 
 						<div class="row">
+							{formfeedback error=$feedback.errors.title}
 							{formlabel label="Title" for="title"}
 							{forminput}
 								<input type="text" size="50" maxlength="200" name="stencil[title]" id="title" value="{$gContent->mInfo.title|escape}" />
@@ -38,10 +39,11 @@
 							{formlabel label="Description" for="description"}
 							{forminput}
 								<input size="50" type="text" name="stencil[description]" id="description" value="{$gContent->mInfo.description|escape}" />
-								{formhelp note="Brief description of the page."}
+								{formhelp note="Brief description of the stencil."}
 							{/forminput}
 						</div>
 
+						{formfeedback error=$feedback.errors.fields}
 						{textarea name="stencil[edit]"}{$gContent->mInfo.data}{/textarea}
 
 						{* any simple service edit options *}
