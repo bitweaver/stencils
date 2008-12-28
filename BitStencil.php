@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.15 2008/12/26 20:57:58 pppspoonman Exp $
-* $Id: BitStencil.php,v 1.15 2008/12/26 20:57:58 pppspoonman Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.16 2008/12/28 06:54:33 squareing Exp $
+* $Id: BitStencil.php,v 1.16 2008/12/28 06:54:33 squareing Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.15 $ $Date: 2008/12/26 20:57:58 $ $Author: pppspoonman $
+* @version $Revision: 1.16 $ $Date: 2008/12/28 06:54:33 $ $Author: squareing $
 * @class BitStencil
 */
 
@@ -51,7 +51,7 @@ class BitStencil extends LibertyMime {
 		$this->invalidRegexp = "!\{{3}(.*?)\}{3}!";
 		$this->mContentTypeGuid = BITSTENCIL_CONTENT_TYPE_GUID;
 		$this->registerContentType(
-		   	BITSTENCIL_CONTENT_TYPE_GUID, array(
+			BITSTENCIL_CONTENT_TYPE_GUID, array(
 				'content_type_guid'   => BITSTENCIL_CONTENT_TYPE_GUID,
 				'content_description' => 'Stencil',
 				'handler_class'       => 'BitStencil',
@@ -156,7 +156,7 @@ class BitStencil extends LibertyMime {
 	**/
 	function verify( &$pParamHash ) {
 		global $gBitUser, $gBitSystem;
-		
+
 		// make sure we're all loaded up of we have a mStencilId
 		if( $this->verifyId( $this->mStencilId ) && empty( $this->mInfo ) ) {
 			$this->load();
@@ -204,30 +204,30 @@ class BitStencil extends LibertyMime {
 			// no name specified
 			$this->mErrors['title'] = 'You must specify a name';
 		}
-		
+
 		$validArray = array ();
 		$invalidArray = array ();
 		preg_match_all($this->validRegexp, $pParamHash['edit'], $validArray);
 		preg_match_all($this->invalidRegexp, $pParamHash['edit'], $invalidArray);
-		
+
 		//Invalid array will catch all of stencils with spaces, special characters etc. as it's wider.
 		//Iterate by this array and compare which keys are invalid.
-		
+
 		$validCounter = 0;
-		
+
 		foreach( $invalidArray[1] as $key => $value) {
-			//Turn on for debug.			
+			//Turn on for debug.
 			//$this->mErrors['fields'][] = "Comparing key $key value $value with ".$validArray[1][$validCounter].".";
-			
+
 			//it's present and it's equal
 			if( array_key_exists($validCounter, $validArray[1]) && $value == $validArray[1][$validCounter]) {
 				$validCounter++;
 				continue;
 			}
-			
+
 			$this->mErrors['fields'][] = "Stencil field '$value' is not correct. For compatibility please don't use spaces, national or special characters.";
 		}
-		
+
 		return( count( $this->mErrors )== 0 );
 	}
 
