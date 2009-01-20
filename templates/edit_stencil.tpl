@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.5 2008/12/26 20:57:58 pppspoonman Exp $ *}
+{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.6 2009/01/20 22:18:07 dansut Exp $ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
@@ -47,7 +47,7 @@
 						{textarea name="stencil[edit]"}{$gContent->mInfo.data}{/textarea}
 
 						{* any simple service edit options *}
-						{include file="bitpackage:liberty/edit_services_inc.tpl serviceFile=content_edit_mini_tpl}
+						{include file="bitpackage:liberty/edit_services_inc.tpl" serviceFile="content_edit_mini_tpl"}
 
 						<div class="row submit">
 							<input type="submit" name="preview" value="{tr}Preview{/tr}" /> 
@@ -57,7 +57,7 @@
 				{/jstab}
 
 				{* any service edit template tabs *}
-				{include file="bitpackage:liberty/edit_services_inc.tpl serviceFile=content_edit_tab_tpl}
+				{include file="bitpackage:liberty/edit_services_inc.tpl" serviceFile="content_edit_tab_tpl"}
 			{/jstabs}
 		{/form}
 	</div><!-- end .body -->
