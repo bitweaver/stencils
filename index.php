@@ -1,8 +1,8 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/index.php,v 1.4 2008/09/25 01:12:18 laetzer Exp $
+// $Header: /cvsroot/bitweaver/_bit_stencils/index.php,v 1.5 2009/10/01 13:45:48 wjames5 Exp $
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
-// Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
+// Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.
 
 // Initialization
 require_once( '../bit_setup_inc.php' );
