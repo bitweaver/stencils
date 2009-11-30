@@ -1,6 +1,6 @@
 <?php
 /**
- * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.2 2008/09/25 21:16:58 squareing Exp $
+ * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.3 2009/11/30 17:38:33 tylerbello Exp $
  * @package  liberty
  * @subpackage plugins_filter
  */
@@ -8,6 +8,7 @@
 /**
  * definitions ( guid character limit is 16 chars )
  */
+
 define( 'PLUGIN_GUID_FILTERSTENCIL', 'filterstencil' );
 
 global $gLibertySystem, $gBitSystem;
@@ -81,14 +82,41 @@ function stencil_parse_data( $pMatches ) {
 					}
 				}
 			}
+			
+			
 			// any remaining {{{vars}}} will be removed
 			$pattern = array(
 				"!\{{3}\w+?>.*?<\w+\}{3}!s",
 				"!\{{3}\w+?\}{3}!",
 			);
 			$output = preg_replace( $pattern, "", $output );
+			
+			//Process conditional statements ie. "{{#functionName}}"
+			$output = preg_replace_callback("/{{#.*?}}/",'post_process',$output );
 		}
 	}
 	return( $output );
+}
+
+function post_process( $pData ){
+	$ret = '';
+	$matches = array();
+	if( preg_match_all( '/{{#if:[^|]*|}}/', $pData['0'], $matches ) ) {
+		//This is an if statement in mediawiki syntax
+		//{{#if:condition|result if true|result if false}}
+		//remove the if, colon, and ending brackets to be left with 'condition|result if true|result if false' so that we can easily split
+		$pData['0'] = substr($pData['0'],strpos($pData['0'],':')+1);
+		$pData['0'] = substr($pData['0'],0,strpos($pData['0'],'}}'));
+		$tokens = preg_split('/\|/',$pData['0']);
+		//token[0] is the checked variable
+		//token[1] is case for true
+		//token[2] is case for false
+		if(!empty($tokens[0])){
+			$ret = $tokens[1];
+		}else{
+			$ret = $tokens[2];
+		}
+	}
+	return $ret;
 }
 ?>
