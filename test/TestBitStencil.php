@@ -1,5 +1,5 @@
 <?php
-require_once('../../bit_setup_inc.php');
+require_once('../../kernel/setup_inc.php');
 require_once(STENCIL_PKG_PATH.'BitStencil.php');
 
 class TestBitStencil extends Test {
