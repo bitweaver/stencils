@@ -1,6 +1,6 @@
 <?php
 /**
- * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.3 2009/11/30 17:38:33 tylerbello Exp $
+ * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.4 2010/03/27 01:08:45 spiderr Exp $
  * @package  liberty
  * @subpackage plugins_filter
  */
@@ -67,7 +67,7 @@ function stencil_parse_data( $pMatches ) {
 		if( $lines = explode( '|', $pMatches[2] )) {
 			foreach( $lines as $line ) {
 				if( strpos( $line, '=' ) ) {
-					list( $name, $value ) = split( '=', trim( $line ), 2 );
+					list( $name, $value ) = explode( '=', trim( $line ), 2 );
 					// if the value is empty, we remove all the conditional stuff surrounding it
 					if( empty( $value ) && !is_numeric( $value )) {
 						$output = preg_replace( "!\{{3}$name>.*?<$name\}{3}!s", "", $output );
@@ -107,7 +107,7 @@ function post_process( $pData ){
 		//remove the if, colon, and ending brackets to be left with 'condition|result if true|result if false' so that we can easily split
 		$pData['0'] = substr($pData['0'],strpos($pData['0'],':')+1);
 		$pData['0'] = substr($pData['0'],0,strpos($pData['0'],'}}'));
-		$tokens = preg_split('/\|/',$pData['0']);
+		$tokens = explode('|',$pData['0']);
 		//token[0] is the checked variable
 		//token[1] is case for true
 		//token[2] is case for false
