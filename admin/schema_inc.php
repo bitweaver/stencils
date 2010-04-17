@@ -51,4 +51,8 @@ $gBitInstaller->registerPreferences( STENCIL_PKG_NAME, array(
 	array( STENCIL_PKG_NAME, 'stencil_list_description', 'y' ),
 	array( STENCIL_PKG_NAME, 'stencil_list_stencils', 'y' ),
 ) );
-?>
+
+// Requirements
+$gBitInstaller->registerRequirements( STENCIL_PKG_NAME, array(
+    'liberty' => array( 'min' => '2.1.4' ),
+));

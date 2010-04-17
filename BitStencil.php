@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.16 2008/12/28 06:54:33 squareing Exp $
-* $Id: BitStencil.php,v 1.16 2008/12/28 06:54:33 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.17 2010/04/17 22:46:10 wjames5 Exp $
+* $Id: BitStencil.php,v 1.17 2010/04/17 22:46:10 wjames5 Exp $
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.16 $ $Date: 2008/12/28 06:54:33 $ $Author: squareing $
+* @version $Revision: 1.17 $ $Date: 2010/04/17 22:46:10 $ $Author: wjames5 $
 * @class BitStencil
 */
 
@@ -53,7 +53,7 @@ class BitStencil extends LibertyMime {
 		$this->registerContentType(
 			BITSTENCIL_CONTENT_TYPE_GUID, array(
 				'content_type_guid'   => BITSTENCIL_CONTENT_TYPE_GUID,
-				'content_description' => 'Stencil',
+				'content_name' => 'Stencil',
 				'handler_class'       => 'BitStencil',
 				'handler_package'     => 'stencil',
 				'handler_file'        => 'BitStencil.php',
