@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/admin/admin_stencil_inc.php,v 1.2 2007/08/23 15:18:50 squareing Exp $
+// $Header$
 
 $formStencilLists = array(
 	"stencil_list_stencil_id" => array(

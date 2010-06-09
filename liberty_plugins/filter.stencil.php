@@ -1,6 +1,6 @@
 <?php
 /**
- * @version  $Header: /cvsroot/bitweaver/_bit_stencils/liberty_plugins/filter.stencil.php,v 1.4 2010/03/27 01:08:45 spiderr Exp $
+ * @version  $Header$
  * @package  liberty
  * @subpackage plugins_filter
  */

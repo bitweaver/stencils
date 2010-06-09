@@ -1,7 +1,7 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_stencils/BitStencil.php,v 1.17 2010/04/17 22:46:10 wjames5 Exp $
-* $Id: BitStencil.php,v 1.17 2010/04/17 22:46:10 wjames5 Exp $
+* $Header$
+* $Id$
 */
 
 /**
@@ -10,7 +10,7 @@
 *
 * @date created 2004/8/15
 * @author spider <spider@steelsun.com>
-* @version $Revision: 1.17 $ $Date: 2010/04/17 22:46:10 $ $Author: wjames5 $
+* @version $Revision$
 * @class BitStencil
 */
 

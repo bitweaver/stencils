@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_stencils/list_stencils.php,v 1.7 2010/02/08 21:27:25 wjames5 Exp $
+// $Header$
 // Copyright (c) 2004 bitweaver Stencil
 // All Rights Reserved. See below for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.

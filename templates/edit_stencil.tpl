@@ -1,4 +1,4 @@
-{* $Header: /cvsroot/bitweaver/_bit_stencils/templates/edit_stencil.tpl,v 1.6 2009/01/20 22:18:07 dansut Exp $ *}
+{* $Header$ *}
 {strip}
 <div class="floaticon">{bithelp}</div>
 
