@@ -69,7 +69,7 @@ class BitStencil extends LibertyMime {
 	* Load the data from the database
 	* @param pParamHash be sure to pass by reference in case we need to make modifcations to the hash
 	**/
-	function load() {
+	function load( $pContentId = NULL, $pPluginParams = NULL ) {
 		if( $this->verifyId( $this->mStencilId ) || $this->verifyId( $this->mContentId ) ) {
 			$lookupColumn = $this->verifyId( $this->mStencilId ) ? 'stencil_id' : 'content_id';
 			$bindVars = array();
@@ -263,7 +263,7 @@ class BitStencil extends LibertyMime {
 	 * @param	object	PostId of the item to use
 	 * @return	object	Url String
 	 */
-	function getDisplayUrl( $pStencilId=NULL ) {
+	function getDisplayUrl( $pStencilId=NULL, $pMixed=NULL ) {
 		$ret = NULL;
 		if( empty( $pStencilId ) && !empty( $this ) ) {
 			$pStencilId = $this->getField( 'stencil_id' );
