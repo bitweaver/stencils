@@ -263,14 +263,10 @@ class BitStencil extends LibertyMime {
 	 * @param	object	PostId of the item to use
 	 * @return	object	Url String
 	 */
-	function getDisplayUrl( $pStencilId=NULL, $pMixed=NULL ) {
+	function getDisplayUrlFromHash( $pMixed=NULL ) {
 		$ret = NULL;
-		if( empty( $pStencilId ) && !empty( $this ) ) {
-			$pStencilId = $this->getField( 'stencil_id' );
-		}
-		global $gBitSystem;
-		if( @BitBase::verifyId( $pStencilId ) ) {
-			$ret = STENCIL_PKG_URL.'index.php?stencil_id='.$pStencilId;
+		if( !empty( $pMixed['stencil_id'] ) && BitBase::verifyId( $pMixed['stencil_id'] ) ) {
+			$ret = STENCIL_PKG_URL.'index.php?stencil_id='.$pMixed['stencil_id'];
 		}
 		return $ret;
 	}
