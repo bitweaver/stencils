@@ -44,7 +44,7 @@ class BitStencil extends LibertyMime {
 	* During initialisation, be sure to call our base constructors
 	**/
 	function BitStencil( $pStencilName=NULL, $pContentId=NULL ) {
-		LibertyMime::LibertyMime();
+		parent::__construct();
 		$this->mStencilId = $pStencilName;
 		$this->mContentId = $pContentId;
 		$this->validRegexp = "!\{{3}(\w*?)\}{3}!";
