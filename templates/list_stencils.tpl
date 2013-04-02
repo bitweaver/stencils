@@ -56,10 +56,10 @@
 						{/if}
 						<td class="actionicon">
 							{if $gBitUser->hasPermission( 'p_stencil_update' )}
-								{smartlink ititle="Edit" ifile="edit.php" ibiticon="icons/accessories-text-editor" stencil_id=$stencil.stencil_id}
+								{smartlink ititle="Edit" ifile="edit.php" booticon="icon-edit" stencil_id=$stencil.stencil_id}
 							{/if}
 							{if $gBitUser->hasPermission( 'p_stencil_remove' )}
-								{smartlink ititle="Delete" ifile="remove_stencil.php" ibiticon="icons/edit-delete" stencil_id=$stencil.stencil_id}
+								{smartlink ititle="Delete" ifile="remove_stencil.php" booticon="icon-trash" stencil_id=$stencil.stencil_id}
 							{/if}
 							{if $gBitUser->hasPermission( 'p_stencil_remove' )}
 								<input type="checkbox" name="checked[]" title="{$stencil.title|escape}" value="{$stencil.stencil_id}" />
