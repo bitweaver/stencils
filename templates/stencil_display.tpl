@@ -3,10 +3,10 @@
 	<div class="floaticon">
 		{if $print_page ne 'y'}
 			{if $gBitUser->hasPermission( 'p_stencil_update' )}
-				<a title="{tr}Edit this stencil{/tr}" href="{$smarty.const.STENCIL_PKG_URL}edit.php?stencil_id={$gContent->mInfo.stencil_id}">{biticon ipackage="icons" iname="accessories-text-editor" iexplain="Edit Stencil"}</a>
+				<a title="{tr}Edit this stencil{/tr}" href="{$smarty.const.STENCIL_PKG_URL}edit.php?stencil_id={$gContent->mInfo.stencil_id}">{booticon iname="icon-edit" ipackage="icons" iexplain="Edit Stencil"}</a>
 			{/if}
 			{if $gBitUser->hasPermission( 'p_stencil_remove' )}
-				<a title="{tr}Remove this stencil{/tr}" href="{$smarty.const.STENCIL_PKG_URL}remove_stencil.php?stencil_id={$gContent->mInfo.stencil_id}">{biticon ipackage="icons" iname="edit-delete" iexplain="Remove Stencil"}</a>
+				<a title="{tr}Remove this stencil{/tr}" href="{$smarty.const.STENCIL_PKG_URL}remove_stencil.php?stencil_id={$gContent->mInfo.stencil_id}">{booticon iname="icon-trash" ipackage="icons" iexplain="Remove Stencil"}</a>
 			{/if}
 		{/if}<!-- end print_page -->
 	</div><!-- end .floaticon -->
