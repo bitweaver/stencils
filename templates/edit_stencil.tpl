@@ -6,7 +6,7 @@
 	{if $preview}
 		<h2>Preview {$gContent->mInfo.title|escape}</h2>
 		<div class="preview">
-			{include file="bitpackage:stencil/stencil_display.tpl" page=`$gContent->mInfo.stencil_id`}
+			{include file="bitpackage:stencil/stencil_display.tpl" page=$gContent->mInfo.stencil_id}
 		</div>
 	{/if}
 

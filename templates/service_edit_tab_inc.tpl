@@ -11,7 +11,7 @@
 				<h2>
 					{$stencil.title}
 					{if $gBitUser->hasPermission( 'p_stencil_update' )}
-						{smartlink ititle="Edit" booticon="icon-edit" ipackage=stencil ifile=edit.php stencil_id=$stencil.stencil_id}
+						{smartlink ititle="Edit" booticon="icon-edit" ipackage="stencil" ifile="edit.php" stencil_id=$stencil.stencil_id}
 					{/if}
 				</h2>
 				{*
