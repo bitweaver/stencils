@@ -1,5 +1,5 @@
 {strip}
-<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>
+{if $packageMenuTitle}<a class="dropdown-toggle" data-toggle="dropdown" href="#"> {tr}{$packageMenuTitle}{/tr} <b class="caret"></b></a>{/if}
 <ul class="dropdown-menu">
 	{if $gBitUser->hasPermission( 'p_stencil_read')  || $gBitUser->hasPermission( 'p_stencil_remove' ) }
 		<li><a class="item" href="{$smarty.const.STENCIL_PKG_URL}list_stencils.php">{tr}List Stencils{/tr}</a></li>
