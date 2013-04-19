@@ -44,7 +44,7 @@
 						</div>
 
 						{formfeedback error=$feedback.errors.fields}
-						{textarea name="stencil[edit]"}{$gContent->mInfo.data}{/textarea}
+						{textarea name="stencil[edit]" edit=$gContent->mInfo.data}
 
 						{* any simple service edit options *}
 						{include file="bitpackage:liberty/edit_services_inc.tpl" serviceFile="content_edit_mini_tpl"}
