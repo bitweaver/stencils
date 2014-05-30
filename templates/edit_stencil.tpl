@@ -27,7 +27,7 @@
 					{legend legend="Edit Stencil Record"}
 						<input type="hidden" name="stencil[stencil_id]" value="{$gContent->mInfo.stencil_id}" />
 
-						<div class="control-group">
+						<div class="form-group">
 							{formfeedback error=$feedback.errors.title}
 							{formlabel label="Title" for="title"}
 							{forminput}
@@ -35,7 +35,7 @@
 							{/forminput}
 						</div>
 
-						<div class="control-group">
+						<div class="form-group">
 							{formlabel label="Description" for="description"}
 							{forminput}
 								<input size="50" type="text" name="stencil[description]" id="description" value="{$gContent->mInfo.description|escape}" />
@@ -49,7 +49,7 @@
 						{* any simple service edit options *}
 						{include file="bitpackage:liberty/edit_services_inc.tpl" serviceFile="content_edit_mini_tpl"}
 
-						<div class="control-group submit">
+						<div class="form-group submit">
 							<input type="submit" class="btn btn-default" name="preview" value="{tr}Preview{/tr}" /> 
 							<input type="submit" class="btn btn-default" name="save_stencil" value="{tr}Save{/tr}" />
 						</div>
